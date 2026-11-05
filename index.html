@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Full Mock Test</title>
+<!--
+  index.html — the Full Mock Test page ("the shell").
+
+  It holds the login, the home page with the three game cards, the combined
+  results and the export. Each game runs in its own frame, from its own
+  folder: redrock/, seawolf/, sfl/. Nothing is saved in the browser: a
+  refresh starts the sitting again, as a refresh restarts every simulation.
+-->
+<link rel="stylesheet" href="shell.css">
+</head>
+<body>
+
+<!-- The login, home, results and review bar are drawn here by shell.js. -->
+<div id="app"></div>
+
+<!-- The game frames. One per game, created when the game is first opened,
+     kept (hidden) after it finishes so its results page can be shown for
+     the review. -->
+<div id="frames"></div>
+
+<script src="config.js"></script>
+<script src="content/settings.js"></script>
+<script src="shell.js"></script>
+</body>
+</html>

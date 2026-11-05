@@ -1,0 +1,108 @@
+{
+  "directions": "",
+  "review_text": "Please review if the information in the Research Journal is sufficient. If needed you can go back to the Investigation to collect additional information. You will be able to use only the information in the Research Journal in the next phase.",
+  "questions": [
+    {
+      "number": 1,
+      "skill": "calc-chain",
+      "text": "Using the extra observations, what feeding rate should your team now use for the colonies in Linden Bay and Coldwater Arm? Round your answer to the closest 1 decimal point.",
+      "boxes": [
+        {
+          "id": "q1_linden",
+          "label": "Linden Bay",
+          "answer": 0.7,
+          "accept": {
+            "decimals": 1
+          },
+          "explanation": "From Exhibit 2, Linden Bay had 54 fish taken over 12 days by a colony of 9. With the additional data: 210 taken (extra 156), 30 days (extra 18), colony of 10 (one more bird than first counted). New feeding rate = total fish taken ÷ (days observed × colony size) = 210 ÷ (30 × 10) = 210 ÷ 300 = 0.7."
+        },
+        {
+          "id": "q1_coldwater",
+          "label": "Coldwater Arm",
+          "answer": 0.2,
+          "accept": {
+            "decimals": 1
+          },
+          "explanation": "From Exhibit 2, Coldwater Arm had 60 fish taken over 10 days by a colony of 15. With the additional data: 84 taken (extra 24), 28 days (extra 18), colony unchanged at 15. New feeding rate = total fish taken ÷ (days observed × colony size) = 84 ÷ (28 × 15) = 84 ÷ 420 = 0.2."
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "skill": "calc-chain",
+      "text": "At the new feeding rate, how many fish are lost per year in Linden Bay and Coldwater Arm to cormorants and anglers combined? The cormorants spend 325 days a year on the lake. Round your answer to the closest whole number.",
+      "boxes": [
+        {
+          "id": "q2_linden",
+          "label": "Linden Bay",
+          "answer": 2660,
+          "accept": {
+            "decimals": 0
+          },
+          "explanation": "Two losses add up. Fish taken by cormorants per year = new feeding rate × 325 days × colony size = 0.7 × 325 × 10 = 2,275. Fish removed by anglers (Exhibit 1 stocks × Exhibit 3 rates) = 1,000 × 12% + 1,300 × 5% + 800 × 20% + 400 × 10% = 120 + 65 + 160 + 40 = 385. Total yearly loss = 2,275 + 385 = 2,660."
+        },
+        {
+          "id": "q2_coldwater",
+          "label": "Coldwater Arm",
+          "answer": 1353,
+          "accept": {
+            "decimals": 0
+          },
+          "explanation": "Two losses add up. Fish taken by cormorants per year = new feeding rate × 325 days × colony size = 0.2 × 325 × 15 = 975. Fish removed by anglers (Exhibit 1 stocks × Exhibit 3 rates) = 900 × 12% + 800 × 5% + 800 × 20% + 700 × 10% = 108 + 40 + 160 + 70 = 378. Total yearly loss = 975 + 378 = 1,353."
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "skill": "calc-chain",
+      "text": "What will the total number of fish lost per year in Linden Bay and Coldwater Arm be once both measures of the lake authority's plan are in place? Round your answer to the closest whole number.",
+      "boxes": [
+        {
+          "id": "q3_linden",
+          "label": "Linden Bay",
+          "answer": 2205,
+          "accept": {
+            "decimals": 0
+          },
+          "explanation": "The colony of 10 is not more than 10 birds, so the cull does not apply here and the colony stays at 10. The devices cut the feeding rate by 20%: 0.7 × (1 − 20%) = 0.56. Fish taken by cormorants = 0.56 × 325 × 10 = 1,820. The angler removals are unchanged at 385 (the plan does nothing about angling). Total yearly loss after the plan = 1,820 + 385 = 2,205."
+        },
+        {
+          "id": "q3_coldwater",
+          "label": "Coldwater Arm",
+          "answer": 950,
+          "accept": {
+            "decimals": 0
+          },
+          "explanation": "The colony of 15 is more than 10 birds, so the cull removes 4: 15 − 4 = 11 birds. The devices cut the feeding rate by 20%: 0.2 × (1 − 20%) = 0.16. Fish taken by cormorants = 0.16 × 325 × 11 = 572. The angler removals are unchanged at 378 (the plan does nothing about angling). Total yearly loss after the plan = 572 + 378 = 950."
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "skill": "calc-chain",
+      "text": "By what percentage will the lake authority's plan reduce the yearly fish loss in Linden Bay and Coldwater Arm? Round your answer to the closest whole percentage point.",
+      "boxes": [
+        {
+          "id": "q4_linden",
+          "label": "Linden Bay",
+          "unit": "%",
+          "answer": 17,
+          "accept": {
+            "decimals": 0
+          },
+          "explanation": "Reduction = (loss before − loss after) ÷ loss before = (2,660 − 2,205) ÷ 2,660 = 455 ÷ 2,660 = 0.1711 ≈ 17%. Against the 25% target, Linden Bay does not meet it."
+        },
+        {
+          "id": "q4_coldwater",
+          "label": "Coldwater Arm",
+          "unit": "%",
+          "answer": 30,
+          "accept": {
+            "decimals": 0
+          },
+          "explanation": "Reduction = (loss before − loss after) ÷ loss before = (1,353 − 950) ÷ 1,353 = 403 ÷ 1,353 = 0.2979 ≈ 30%. Against the 25% target, Coldwater Arm meets it."
+        }
+      ]
+    }
+  ]
+}

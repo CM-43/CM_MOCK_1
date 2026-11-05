@@ -1,0 +1,224 @@
+{
+  "id": "rr-m1",
+  "title": "Redrock Mock",
+  "scenario": "Thornmere Lake: Slate-crested Cormorants",
+  "time_limit_minutes": 35,
+  "case_count": 6,
+  "return_visit_weight": 0.5,
+  "phases": [
+    "investigation",
+    "analysis",
+    "report",
+    "cases"
+  ],
+  "labels": {
+    "cases_tab": "Cases",
+    "investigation_tab": "Investigation",
+    "analysis_tab": "Analysis",
+    "report_tab": "Report",
+    "review_tab": "Review",
+    "written_tab": "Written",
+    "graph_tab": "Graph",
+    "visual_tab": "Visual",
+    "cases_menu": "Case Questions",
+    "journal_mark_hint": "Mark (!) for important items",
+    "timer_paused": "Timer paused",
+    "demo_note": "This is the free demo, which shows your score and percentile only. Our full simulations come with every answer explained in detail."
+  },
+  "buttons": {
+    "complete_investigation": "Complete Investigation",
+    "next_question": "Next Question",
+    "review": "Review",
+    "conclude": "Conclude",
+    "next_section": "Next Question",
+    "complete_report": "Complete report",
+    "next_case": "Next Case",
+    "finish": "Finish Study"
+  },
+  "popups": {
+    "to_analysis": {
+      "title": "Do you want to move forward?",
+      "text": "If you have collected all the relevant information you can now move to the Analysis phase.",
+      "back": "Back to Investigation",
+      "go": "Move to Analysis"
+    },
+    "analysis_tutorial": {
+      "title": "Moving to the Analysis",
+      "text": "Please get ready for the next stage of the assessment. You will have to answer a few questions related to your research.",
+      "go": "Continue"
+    },
+    "next_question": {
+      "title": "Do you want to move to the next question?",
+      "text": "You won't be able to change your answer",
+      "back": "Back to the question",
+      "go": "Move forward"
+    },
+    "to_report": {
+      "title": "Do you want to move to the Report?",
+      "text": "You won't be able to change your answer",
+      "back": "Back to the question",
+      "go": "Move to Report"
+    },
+    "next_section": {
+      "title": "Do you want to move to the next section?",
+      "text": "You won't be able to change your answer",
+      "back": "Back to the question",
+      "go": "Move to next section"
+    },
+    "cases_tutorial": {
+      "title": "Moving to the Cases",
+      "text": "Please get ready for the next stage of the assessment. You will have to answer a few cases to complete your research.",
+      "go": "Continue"
+    },
+    "next_case": {
+      "title": "Do you want to move to the next question?",
+      "text": "You won't be able to change your answer",
+      "back": "Back to question",
+      "go": "Move forward"
+    },
+    "restart": {
+      "title": "Restart the simulation?",
+      "text": "Your answers will be lost.",
+      "back": "Cancel",
+      "go": "Restart"
+    }
+  },
+  "warnings": {
+    "title": "{n} Minute Warning",
+    "text": "{n} minutes remain to finish your work for both the study and the cases"
+  },
+  "results_mode": "full",
+  "benchmark": {
+    "note": "This percentile is our own estimate for this simulation, not a McKinsey figure. McKinsey does not publish its exact scoring, so we weight each section equally for the purpose of scoring. Candidates who pass typically score in the top quartile, but we recommend aiming for the 90th and above.",
+    "phase_weights": {
+      "investigation": 25,
+      "analysis": 25,
+      "report": 25,
+      "cases": 25
+    },
+    "zones": [
+      {
+        "from": 0,
+        "label": "Below 70th"
+      },
+      {
+        "from": 70,
+        "label": "Borderline"
+      },
+      {
+        "from": 80,
+        "label": "Likely pass"
+      },
+      {
+        "from": 90,
+        "label": "Comfortable"
+      }
+    ],
+    "percentiles": [
+      [
+        0,
+        1
+      ],
+      [
+        20,
+        5
+      ],
+      [
+        35,
+        12
+      ],
+      [
+        45,
+        20
+      ],
+      [
+        55,
+        30
+      ],
+      [
+        62,
+        40
+      ],
+      [
+        68,
+        50
+      ],
+      [
+        74,
+        60
+      ],
+      [
+        79,
+        68
+      ],
+      [
+        84,
+        75
+      ],
+      [
+        88,
+        80
+      ],
+      [
+        91,
+        85
+      ],
+      [
+        94,
+        90
+      ],
+      [
+        96,
+        94
+      ],
+      [
+        98,
+        97
+      ],
+      [
+        100,
+        99
+      ]
+    ]
+  },
+  "skills": {
+    "list": [
+      {
+        "id": "find-data",
+        "label": "Finding the data that matters"
+      },
+      {
+        "id": "calc-chain",
+        "label": "Multi-step calculation chains"
+      },
+      {
+        "id": "report-target",
+        "label": "Comparing results against the target and reporting them"
+      },
+      {
+        "id": "arithmetic",
+        "label": "Arithmetic"
+      },
+      {
+        "id": "probability",
+        "label": "Probability of events in sequence"
+      },
+      {
+        "id": "stats",
+        "label": "Mean, median and mode"
+      },
+      {
+        "id": "statements",
+        "label": "Verbal logical deduction"
+      },
+      {
+        "id": "chart-choice",
+        "label": "Graph selection"
+      },
+      {
+        "id": "formula",
+        "label": "Formula identification"
+      }
+    ]
+  }
+}

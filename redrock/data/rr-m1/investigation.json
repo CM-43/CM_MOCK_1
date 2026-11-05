@@ -1,0 +1,525 @@
+{
+  "directions": "Drag only the relevant data into your Research Journal for the study's Objective.",
+  "skill": "find-data",
+  "tabs": [
+    {
+      "id": "objective",
+      "label": "Objective"
+    },
+    {
+      "id": "study",
+      "label": "Study"
+    },
+    {
+      "id": "exhibit1",
+      "label": "Exhibit 1"
+    },
+    {
+      "id": "exhibit2",
+      "label": "Exhibit 2"
+    },
+    {
+      "id": "exhibit3",
+      "label": "Exhibit 3"
+    }
+  ],
+  "sections": [
+    {
+      "id": "objective",
+      "heading": "Research Information",
+      "blocks": [
+        {
+          "kind": "text",
+          "text": "Thornmere Lake is a large inland lake made up of four basins. For decades its fish stocks have supported a healthy recreational fishery, managed by the regional lake authority and fished by anglers from across the region."
+        },
+        {
+          "kind": "text",
+          "text": "However, [[cormorant_intro]], a colony of Slate-crested Cormorants settled on the lake, and further colonies have since formed in every basin. The cormorants feed on the lake's fish, and anglers have reported falling catches in each basin since."
+        },
+        {
+          "kind": "text",
+          "text": "Your team of ecologists has been asked to assess the lake authority's plan to protect the fish stocks."
+        },
+        {
+          "kind": "heading",
+          "text": "Objective"
+        },
+        {
+          "kind": "text",
+          "text": "[[objective_line]]"
+        }
+      ]
+    },
+    {
+      "id": "study",
+      "heading": "Study Information",
+      "blocks": [
+        {
+          "kind": "text",
+          "text": "The lake authority's plan has two measures. A cull will [[plan_cull]]. Bird-scaring devices along the shore will [[plan_devices]]. Both measures will be [[plan_timing]]. The devices cost [[plan_cost]], and the plan will be [[plan_review]]. A catch-and-release rule for Bream was also discussed but [[plan_release]]."
+        },
+        {
+          "kind": "text",
+          "text": "To judge the plan, your team surveyed the four fish species most often taken by Slate-crested Cormorants. Their stocks, split across the four basins of Thornmere Lake, are as follows:"
+        }
+      ]
+    },
+    {
+      "id": "exhibit1",
+      "heading": "Exhibit 1: Stock of the Four Main Prey Species Across Basins of Thornmere Lake",
+      "blocks": [
+        {
+          "kind": "table",
+          "header": [
+            "Basins",
+            "Perch",
+            "Roach",
+            "Bream",
+            "Tench"
+          ],
+          "rows": [
+            [
+              "Ashby Reach",
+              "[[ex1_1_1]]",
+              "[[ex1_1_2]]",
+              "[[ex1_1_3]]",
+              "[[ex1_1_4]]"
+            ],
+            [
+              "Linden Bay",
+              "[[ex1_2_1]]",
+              "[[ex1_2_2]]",
+              "[[ex1_2_3]]",
+              "[[ex1_2_4]]"
+            ],
+            [
+              "Coldwater Arm",
+              "[[ex1_3_1]]",
+              "[[ex1_3_2]]",
+              "[[ex1_3_3]]",
+              "[[ex1_3_4]]"
+            ],
+            [
+              "Heron Shallows",
+              "[[ex1_4_1]]",
+              "[[ex1_4_2]]",
+              "[[ex1_4_3]]",
+              "[[ex1_4_4]]"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Cormorants do take other fish, but these make up only [[other_prey_diet]]. To see how the cormorants are affecting the stocks above, your team surveyed the colony feeding in each basin, with the results below:"
+        }
+      ]
+    },
+    {
+      "id": "exhibit2",
+      "heading": "Exhibit 2: Slate-crested Cormorant Feeding Survey Across Basins of Thornmere Lake",
+      "blocks": [
+        {
+          "kind": "table",
+          "header": [
+            "Basins",
+            "Feeding Rate",
+            "Total Fish Taken",
+            "Days Observed",
+            "Colony Size"
+          ],
+          "rows": [
+            [
+              "Ashby Reach",
+              "[[ex2_1_1]]",
+              "[[ex2_1_2]]",
+              "[[ex2_1_3]]",
+              "[[ex2_1_4]]"
+            ],
+            [
+              "Linden Bay",
+              "[[ex2_2_1]]",
+              "[[ex2_2_2]]",
+              "[[ex2_2_3]]",
+              "[[ex2_2_4]]"
+            ],
+            [
+              "Coldwater Arm",
+              "[[ex2_3_1]]",
+              "[[ex2_3_2]]",
+              "[[ex2_3_3]]",
+              "[[ex2_3_4]]"
+            ],
+            [
+              "Heron Shallows",
+              "[[ex2_4_1]]",
+              "[[ex2_4_2]]",
+              "[[ex2_4_3]]",
+              "[[ex2_4_4]]"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "The feeding rate in the table is defined as the [[feeding_rate_def]]. Your team's working assumption is that [[feeding_behavior]]. [[year_days]]. The lake authority uses the feeding rates together with the fish stocks to monitor the balance between the colonies and the fishery over the year."
+        },
+        {
+          "kind": "text",
+          "text": "After Exhibit 2 was compiled, the survey continued and each colony was observed for an [[additional_tracking]]. The extra observations changed the figures as follows:"
+        },
+        {
+          "kind": "list",
+          "items": [
+            "[[additional_data_1]]",
+            "[[additional_data_2]]",
+            "[[additional_data_3]]",
+            "[[additional_data_4]]",
+            "[[additional_data_5]]",
+            "[[additional_data_6]]"
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "Cormorants are not the only pressure on the stocks: anglers also remove fish from the lake each year. The lake authority's estimated removal rates are:"
+        }
+      ]
+    },
+    {
+      "id": "exhibit3",
+      "heading": "Exhibit 3: Estimated Annual Removal by Anglers",
+      "blocks": [
+        {
+          "kind": "table",
+          "header": [
+            "Species",
+            "Removal Rate (% of starting stock)"
+          ],
+          "rows": [
+            [
+              "Perch",
+              "[[ex3_1]]"
+            ],
+            [
+              "Roach",
+              "[[ex3_2]]"
+            ],
+            [
+              "Bream",
+              "[[ex3_3]]"
+            ],
+            [
+              "Tench",
+              "[[ex3_4]]"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "items": {
+    "cormorant_intro": {
+      "label": "Arrival of Slate-crested Cormorants",
+      "text": "7 years ago",
+      "required": false
+    },
+    "objective_line": {
+      "label": "Objective",
+      "text": "Review the data and determine whether the lake authority's plan will meet its target of cutting the yearly fish loss in Linden Bay and Coldwater Arm by at least 25%.",
+      "required": true,
+      "needed_for": "Every question: it defines which two basins matter; Question 4 and the Report: the 25% target"
+    },
+    "plan_cull": {
+      "label": "The cull",
+      "text": "remove 4 birds from every colony of more than 10 birds",
+      "required": true,
+      "needed_for": "Question 3: the cull applies only where the colony is large enough"
+    },
+    "plan_devices": {
+      "label": "Bird-scaring devices",
+      "text": "cut the feeding rate of a colony by 20%",
+      "required": true,
+      "needed_for": "Question 3"
+    },
+    "plan_timing": {
+      "label": "Timing of the plan",
+      "text": "in place for the whole of next year",
+      "required": true,
+      "needed_for": "Question 3: both measures apply to the full 325 days"
+    },
+    "plan_cost": {
+      "label": "Cost of the devices",
+      "text": "$1,800 per basin",
+      "required": false
+    },
+    "plan_release": {
+      "label": "Catch-and-release proposal",
+      "text": "is not part of the plan",
+      "required": false
+    },
+    "plan_review": {
+      "label": "Review of the plan",
+      "text": "reviewed after two years",
+      "required": false
+    },
+    "other_prey_diet": {
+      "label": "Other fish species' contribution toward Slate-crested Cormorant diets",
+      "text": "a very small share of their diet",
+      "required": true,
+      "needed_for": "Questions 2 and 3: the four surveyed species are the whole catch"
+    },
+    "feeding_rate_def": {
+      "label": "Definition of feeding rate",
+      "text": "number of the four surveyed fish species taken per day per cormorant",
+      "required": true,
+      "needed_for": "Question 1"
+    },
+    "feeding_behavior": {
+      "label": "Slate-crested Cormorant feeding behavior",
+      "text": "the four species are taken in proportion to their stock",
+      "required": false
+    },
+    "year_days": {
+      "label": "Feeding rate over the year",
+      "text": "Once calculated, the feeding rate is expected to remain constant for the 325 days a year that the cormorants spend on the lake",
+      "required": true,
+      "needed_for": "Questions 2 and 3"
+    },
+    "additional_tracking": {
+      "label": "Additional Slate-crested Cormorant observation time",
+      "text": "additional 18 days",
+      "required": true,
+      "needed_for": "Question 1"
+    },
+    "additional_data_1": {
+      "label": "Additional data #1",
+      "text": "Ashby Reach: 2 birds left the colony",
+      "required": false
+    },
+    "additional_data_2": {
+      "label": "Additional data #2",
+      "text": "Ashby Reach: 90 more fish taken",
+      "required": false
+    },
+    "additional_data_3": {
+      "label": "Additional data #3",
+      "text": "Linden Bay: 156 more fish taken",
+      "required": true,
+      "needed_for": "Question 1"
+    },
+    "additional_data_4": {
+      "label": "Additional data #4",
+      "text": "Linden Bay: one more bird found in the colony than first counted",
+      "required": true,
+      "needed_for": "Questions 1, 2 and 3: the corrected colony size"
+    },
+    "additional_data_5": {
+      "label": "Additional data #5",
+      "text": "Coldwater Arm: 24 more fish taken",
+      "required": true,
+      "needed_for": "Question 1"
+    },
+    "additional_data_6": {
+      "label": "Additional data #6",
+      "text": "Heron Shallows: 3 more birds joined the colony",
+      "required": false
+    },
+    "ex1_1_1": {
+      "label": "Perch stock in Ashby Reach",
+      "text": "700",
+      "required": false
+    },
+    "ex1_1_2": {
+      "label": "Roach stock in Ashby Reach",
+      "text": "1,300",
+      "required": false
+    },
+    "ex1_1_3": {
+      "label": "Bream stock in Ashby Reach",
+      "text": "450",
+      "required": false
+    },
+    "ex1_1_4": {
+      "label": "Tench stock in Ashby Reach",
+      "text": "350",
+      "required": false
+    },
+    "ex2_1_1": {
+      "label": "Feeding rate in Ashby Reach",
+      "text": "0.55",
+      "required": false
+    },
+    "ex2_1_2": {
+      "label": "Total fish taken in Ashby Reach",
+      "text": "66",
+      "required": false
+    },
+    "ex2_1_3": {
+      "label": "Days observed in Ashby Reach",
+      "text": "10",
+      "required": false
+    },
+    "ex2_1_4": {
+      "label": "Colony size in Ashby Reach",
+      "text": "12",
+      "required": false
+    },
+    "ex1_2_1": {
+      "label": "Perch stock in Linden Bay",
+      "text": "1,000",
+      "required": true,
+      "needed_for": "Question 2 (the angler removals)"
+    },
+    "ex1_2_2": {
+      "label": "Roach stock in Linden Bay",
+      "text": "1,300",
+      "required": true,
+      "needed_for": "Question 2 (the angler removals)"
+    },
+    "ex1_2_3": {
+      "label": "Bream stock in Linden Bay",
+      "text": "800",
+      "required": true,
+      "needed_for": "Question 2 (the angler removals)"
+    },
+    "ex1_2_4": {
+      "label": "Tench stock in Linden Bay",
+      "text": "400",
+      "required": true,
+      "needed_for": "Question 2 (the angler removals)"
+    },
+    "ex2_2_1": {
+      "label": "Feeding rate in Linden Bay",
+      "text": "0.50",
+      "required": false
+    },
+    "ex2_2_2": {
+      "label": "Total fish taken in Linden Bay",
+      "text": "54",
+      "required": true,
+      "needed_for": "Question 1"
+    },
+    "ex2_2_3": {
+      "label": "Days observed in Linden Bay",
+      "text": "12",
+      "required": true,
+      "needed_for": "Question 1"
+    },
+    "ex2_2_4": {
+      "label": "Colony size in Linden Bay",
+      "text": "9",
+      "required": true,
+      "needed_for": "Questions 1, 2 and 3"
+    },
+    "ex1_3_1": {
+      "label": "Perch stock in Coldwater Arm",
+      "text": "900",
+      "required": true,
+      "needed_for": "Question 2 (the angler removals)"
+    },
+    "ex1_3_2": {
+      "label": "Roach stock in Coldwater Arm",
+      "text": "800",
+      "required": true,
+      "needed_for": "Question 2 (the angler removals)"
+    },
+    "ex1_3_3": {
+      "label": "Bream stock in Coldwater Arm",
+      "text": "800",
+      "required": true,
+      "needed_for": "Question 2 (the angler removals)"
+    },
+    "ex1_3_4": {
+      "label": "Tench stock in Coldwater Arm",
+      "text": "700",
+      "required": true,
+      "needed_for": "Question 2 (the angler removals)"
+    },
+    "ex2_3_1": {
+      "label": "Feeding rate in Coldwater Arm",
+      "text": "0.40",
+      "required": false
+    },
+    "ex2_3_2": {
+      "label": "Total fish taken in Coldwater Arm",
+      "text": "60",
+      "required": true,
+      "needed_for": "Question 1"
+    },
+    "ex2_3_3": {
+      "label": "Days observed in Coldwater Arm",
+      "text": "10",
+      "required": true,
+      "needed_for": "Question 1"
+    },
+    "ex2_3_4": {
+      "label": "Colony size in Coldwater Arm",
+      "text": "15",
+      "required": true,
+      "needed_for": "Questions 1, 2 and 3"
+    },
+    "ex1_4_1": {
+      "label": "Perch stock in Heron Shallows",
+      "text": "650",
+      "required": false
+    },
+    "ex1_4_2": {
+      "label": "Roach stock in Heron Shallows",
+      "text": "900",
+      "required": false
+    },
+    "ex1_4_3": {
+      "label": "Bream stock in Heron Shallows",
+      "text": "800",
+      "required": false
+    },
+    "ex1_4_4": {
+      "label": "Tench stock in Heron Shallows",
+      "text": "550",
+      "required": false
+    },
+    "ex2_4_1": {
+      "label": "Feeding rate in Heron Shallows",
+      "text": "0.45",
+      "required": false
+    },
+    "ex2_4_2": {
+      "label": "Total fish taken in Heron Shallows",
+      "text": "81",
+      "required": false
+    },
+    "ex2_4_3": {
+      "label": "Days observed in Heron Shallows",
+      "text": "12",
+      "required": false
+    },
+    "ex2_4_4": {
+      "label": "Colony size in Heron Shallows",
+      "text": "15",
+      "required": false
+    },
+    "ex3_1": {
+      "label": "Perch removal rate by anglers (%)",
+      "text": "12",
+      "required": true,
+      "needed_for": "Question 2 (the angler removals)"
+    },
+    "ex3_2": {
+      "label": "Roach removal rate by anglers (%)",
+      "text": "5",
+      "required": true,
+      "needed_for": "Question 2 (the angler removals)"
+    },
+    "ex3_3": {
+      "label": "Bream removal rate by anglers (%)",
+      "text": "20",
+      "required": true,
+      "needed_for": "Question 2 (the angler removals)"
+    },
+    "ex3_4": {
+      "label": "Tench removal rate by anglers (%)",
+      "text": "10",
+      "required": true,
+      "needed_for": "Question 2 (the angler removals)"
+    }
+  },
+  "explanation": "Only the two basins named in the objective, Linden Bay and Coldwater Arm, matter, so everything about Ashby Reach and Heron Shallows is a distractor. So are the year the cormorants arrived, the cost and review of the plan, the catch-and-release proposal (it is not part of the plan), the assumption that the species are taken in proportion to their stock (no question uses it), and the feeding rates printed in Exhibit 2 (the new rate is worked out from the totals, and nothing compares it with the old one). The three plan items are needed for Question 3, and the colony sizes are used three times: for the rate, for the yearly catch, and for the cull."
+}

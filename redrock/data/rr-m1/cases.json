@@ -1,0 +1,527 @@
+{
+  "directions": "",
+  "cases": [
+    {
+      "number": 1,
+      "skill": "stats",
+      "mechanism": "numbers",
+      "calculator": true,
+      "prompt": "Bird surveyors counted the Reed Warbler nests in five reed beds around Thornmere Lake over four consecutive breeding seasons:",
+      "data": [
+        {
+          "kind": "table",
+          "header": [
+            "Reed bed",
+            "Season 1",
+            "Season 2",
+            "Season 3",
+            "Season 4"
+          ],
+          "draggable": true,
+          "rows": [
+            [
+              "Ashby Reach",
+              "14",
+              "18",
+              "21",
+              "27"
+            ],
+            [
+              "Linden Bay",
+              "9",
+              "12",
+              "12",
+              "15"
+            ],
+            [
+              "Coldwater Arm",
+              "22",
+              "26",
+              "30",
+              "34"
+            ],
+            [
+              "Heron Shallows",
+              "11",
+              "12",
+              "16",
+              "19"
+            ],
+            [
+              "Reed Island",
+              "8",
+              "10",
+              "12",
+              "14"
+            ]
+          ]
+        }
+      ],
+      "question": "Report the mean, median, and mode of the nest counts based on the data above.",
+      "boxes": [
+        {
+          "id": "c1_mean",
+          "label": "Mean =",
+          "answer": 17.1,
+          "accept": {
+            "decimals": 1
+          },
+          "explanation": "Row totals: 80 + 48 + 112 + 58 + 44 = 342 over 20 values; mean = 342 ÷ 20 = 17.1."
+        },
+        {
+          "id": "c1_median",
+          "label": "Median =",
+          "answer": 14.5,
+          "accept": {
+            "decimals": 1
+          },
+          "explanation": "Sorted: 8, 9, 10, 11, 12, 12, 12, 12, 14, 14, 15, 16, 18, 19, 21, 22, 26, 27, 30, 34. 20 values, so the median is the average of the 10th and 11th: (14 + 15) ÷ 2 = 14.5."
+        },
+        {
+          "id": "c1_mode",
+          "label": "Mode =",
+          "answer": 12,
+          "accept": {
+            "decimals": 0
+          },
+          "explanation": "12 appears 4 times, more than any other value."
+        }
+      ],
+      "explanation": "There are 20 values. Adding each reed bed's row first and then the five row totals is the quickest way to the mean; writing the 20 values out in order once gives both the median and the mode."
+    },
+    {
+      "number": 2,
+      "skill": "statements",
+      "mechanism": "choose_many",
+      "calculator": false,
+      "prompt": "Volunteers on Thornmere Lake record the number of eggs in every duck nest they find. The table below shows the average clutch size (eggs per nest) for four duck species in each basin last spring:",
+      "data": [
+        {
+          "kind": "table",
+          "header": [
+            "Basins",
+            "Mallard",
+            "Teal",
+            "Pochard",
+            "Goosander"
+          ],
+          "rows": [
+            [
+              "Ashby Reach",
+              "9.4",
+              "8.6",
+              "8.9",
+              "10.2"
+            ],
+            [
+              "Linden Bay",
+              "8.1",
+              "8.4",
+              "9.3",
+              "10.0"
+            ],
+            [
+              "Coldwater Arm",
+              "9.0",
+              "8.2",
+              "8.7",
+              "10.6"
+            ],
+            [
+              "Heron Shallows",
+              "9.2",
+              "8.0",
+              "9.6",
+              "11.1"
+            ]
+          ]
+        }
+      ],
+      "question": "Which of the following statements are supported by the data? You may select more than one.",
+      "options": {
+        "a": "Pochard nests in Heron Shallows held more eggs on average than Pochard nests in any other basin.",
+        "b": "More Pochard nests were found in Heron Shallows than in Linden Bay.",
+        "c": "Teal had the smallest average clutch of the four species in every basin.",
+        "d": "Goosander had the largest average clutch of the four species in every basin."
+      },
+      "answer": [
+        "a",
+        "d"
+      ],
+      "option_explanations": {
+        "a": "Supported. Pochard average 9.6 eggs in Heron Shallows, more than in Linden Bay (9.3), Ashby Reach (8.9) or Coldwater Arm (8.7).",
+        "b": "Not supported. The table gives average clutch sizes, not the number of nests; a basin with bigger clutches could have had fewer nests.",
+        "c": "Not supported. In Linden Bay, Teal average 8.4 but Mallard average 8.1, so Teal did not have the smallest clutch there. One exception is enough to break a statement about every basin.",
+        "d": "Supported. In every row the Goosander figure is the largest of the four: 10.2 in Ashby Reach, 10.0 in Linden Bay, 10.6 in Coldwater Arm, 11.1 in Heron Shallows."
+      },
+      "explanation": "Statements a and d can be read directly from the table. Do not select a statement unless the data makes it certain: statement b needs counts the table does not give, and statement c fails in one basin."
+    },
+    {
+      "number": 3,
+      "skill": "formula",
+      "mechanism": "choose_one",
+      "calculator": true,
+      "prompt": "Researchers trap Spotted Eels in Thornmere Lake to count them. Each year they set a number of traps (N) for a number of nights (D) and record how many eels are caught (E). Their records for the last four years are:",
+      "data": [
+        {
+          "kind": "table",
+          "header": [
+            "Year",
+            "Traps set (N)",
+            "Nights (D)",
+            "Eels caught (E)"
+          ],
+          "draggable": true,
+          "rows": [
+            [
+              "Year 1",
+              "10",
+              "4",
+              "20"
+            ],
+            [
+              "Year 2",
+              "8",
+              "5",
+              "20"
+            ],
+            [
+              "Year 3",
+              "12",
+              "5",
+              "30"
+            ],
+            [
+              "Year 4",
+              "6",
+              "10",
+              "30"
+            ]
+          ]
+        }
+      ],
+      "question": "Which formula fits every row of the table?",
+      "options": {
+        "a": "E = 2 × N",
+        "b": "E = N + 2 × D + 2",
+        "c": "E = N × D ÷ 2",
+        "d": "E = 5 × D"
+      },
+      "answer": "c",
+      "explanation": "Plug each year's numbers into each formula and compare with the eels caught. Every formula fits Year 1 (N = 10, D = 4, E = 20), so one row is not enough; the formula must fit all four. Option a fails in Year 2: 2 × N gives 16, not 20. Option b fails in Year 3: N + 2 × D + 2 gives 24, not 30. Option d fails in Year 2: 5 × D gives 25, not 20. Option c fits every row: 10 × 4 ÷ 2 = 20; 8 × 5 ÷ 2 = 20; 12 × 5 ÷ 2 = 30; 6 × 10 ÷ 2 = 30. So the answer is c."
+    },
+    {
+      "number": 4,
+      "skill": "probability",
+      "mechanism": "number",
+      "calculator": true,
+      "prompt": "Young Silver Trout swim up into Thornmere Lake from the river below it in two runs each year. On the way they must get past three small dams, one after the other, and a fish that fails at a dam is lost. Researchers estimated the chance of getting past each dam, and the chance that a fish reaching the lake survives its first year there, for each run:",
+      "data": [
+        {
+          "kind": "table",
+          "header": [
+            "",
+            "Spring run",
+            "Fall run"
+          ],
+          "draggable": true,
+          "rows": [
+            [
+              "Chance of passing Dam 1 (%)",
+              "80",
+              "70"
+            ],
+            [
+              "Chance of passing Dam 2 (%)",
+              "75",
+              "60"
+            ],
+            [
+              "Chance of passing Dam 3 (%)",
+              "90",
+              "85"
+            ],
+            [
+              "Chance of surviving the first year in the lake (%)",
+              "60",
+              "50"
+            ]
+          ]
+        }
+      ],
+      "question": "What is the probability that a young Silver Trout in the spring run reaches the lake and survives its first year there? Give your answer as a percentage, rounded to the closest whole number.",
+      "boxes": [
+        {
+          "id": "c4",
+          "label": "Answer (%) =",
+          "answer": 32,
+          "accept": {
+            "decimals": 0
+          }
+        }
+      ],
+      "explanation": "The fish must get past Dam 1, then Dam 2, then Dam 3, then survive the year: four events in sequence, so their chances are multiplied together. Spring run: 0.8 × 0.75 × 0.9 × 0.6 = 0.3240 = 32.4%, which rounds to 32%. The fall run column is not asked about (it would give 17.85%). Adding the percentages, or multiplying only the three dam chances (54%), gives the wrong answer."
+    },
+    {
+      "number": 5,
+      "skill": "find-data",
+      "mechanism": "collect",
+      "calculator": false,
+      "prompt": "A conservation charity is planting reed beds along the shores of Thornmere Lake to give young fish shelter. The table below shows the planting carried out this spring in Heron Shallows and Ashby Reach:",
+      "data": [
+        {
+          "kind": "table",
+          "header": [
+            "",
+            "Heron Shallows",
+            "Ashby Reach"
+          ],
+          "rows": [
+            [
+              "Plots planted",
+              "[[c5_spring_plots_heron]]",
+              "[[c5_spring_plots_ashby]]"
+            ],
+            [
+              "Seedlings per plot",
+              "[[c5_spring_seedlings_heron]]",
+              "[[c5_spring_seedlings_ashby]]"
+            ],
+            [
+              "Expected first-year survival (%)",
+              "[[c5_spring_survival_heron]]",
+              "[[c5_spring_survival_ashby]]"
+            ],
+            [
+              "Cost per seedling ($)",
+              "[[c5_spring_cost_heron]]",
+              "[[c5_spring_cost_ashby]]"
+            ],
+            [
+              "Expected spread of surviving reeds in Year 2 (%)",
+              "[[c5_spring_spread_heron]]",
+              "[[c5_spring_spread_ashby]]"
+            ]
+          ]
+        },
+        {
+          "kind": "text",
+          "text": "A second planting is planned for this fall. The charity expects the following for the new reed beds:"
+        },
+        {
+          "kind": "table",
+          "header": [
+            "",
+            "Heron Shallows",
+            "Ashby Reach"
+          ],
+          "rows": [
+            [
+              "Plots planted",
+              "[[c5_fall_plots_heron]]",
+              "[[c5_fall_plots_ashby]]"
+            ],
+            [
+              "Seedlings per plot",
+              "[[c5_fall_seedlings_heron]]",
+              "[[c5_fall_seedlings_ashby]]"
+            ],
+            [
+              "Expected first-year survival (%)",
+              "[[c5_fall_survival_heron]]",
+              "[[c5_fall_survival_ashby]]"
+            ],
+            [
+              "Cost per seedling ($)",
+              "[[c5_fall_cost_heron]]",
+              "[[c5_fall_cost_ashby]]"
+            ],
+            [
+              "Expected spread of surviving reeds in Year 2 (%)",
+              "[[c5_fall_spread_heron]]",
+              "[[c5_fall_spread_ashby]]"
+            ]
+          ]
+        }
+      ],
+      "items": {
+        "c5_spring_plots_heron": {
+          "label": "Plots planted for the spring planting in Heron Shallows",
+          "required": true,
+          "text": "12"
+        },
+        "c5_spring_plots_ashby": {
+          "label": "Plots planted for the spring planting in Ashby Reach",
+          "required": false,
+          "text": "8"
+        },
+        "c5_spring_seedlings_heron": {
+          "label": "Seedlings per plot for the spring planting in Heron Shallows",
+          "required": true,
+          "text": "150"
+        },
+        "c5_spring_seedlings_ashby": {
+          "label": "Seedlings per plot for the spring planting in Ashby Reach",
+          "required": false,
+          "text": "120"
+        },
+        "c5_spring_survival_heron": {
+          "label": "Expected first-year survival for the spring planting in Heron Shallows",
+          "required": true,
+          "text": "70"
+        },
+        "c5_spring_survival_ashby": {
+          "label": "Expected first-year survival for the spring planting in Ashby Reach",
+          "required": false,
+          "text": "65"
+        },
+        "c5_spring_cost_heron": {
+          "label": "Cost per seedling for the spring planting in Heron Shallows",
+          "required": false,
+          "text": "2.50"
+        },
+        "c5_spring_cost_ashby": {
+          "label": "Cost per seedling for the spring planting in Ashby Reach",
+          "required": false,
+          "text": "2.50"
+        },
+        "c5_spring_spread_heron": {
+          "label": "Expected spread of surviving reeds in Year 2 for the spring planting in Heron Shallows",
+          "required": false,
+          "text": "15"
+        },
+        "c5_spring_spread_ashby": {
+          "label": "Expected spread of surviving reeds in Year 2 for the spring planting in Ashby Reach",
+          "required": false,
+          "text": "12"
+        },
+        "c5_fall_plots_heron": {
+          "label": "Plots planted for the fall planting in Heron Shallows",
+          "required": true,
+          "text": "6"
+        },
+        "c5_fall_plots_ashby": {
+          "label": "Plots planted for the fall planting in Ashby Reach",
+          "required": false,
+          "text": "10"
+        },
+        "c5_fall_seedlings_heron": {
+          "label": "Seedlings per plot for the fall planting in Heron Shallows",
+          "required": true,
+          "text": "200"
+        },
+        "c5_fall_seedlings_ashby": {
+          "label": "Seedlings per plot for the fall planting in Ashby Reach",
+          "required": false,
+          "text": "100"
+        },
+        "c5_fall_survival_heron": {
+          "label": "Expected first-year survival for the fall planting in Heron Shallows",
+          "required": true,
+          "text": "60"
+        },
+        "c5_fall_survival_ashby": {
+          "label": "Expected first-year survival for the fall planting in Ashby Reach",
+          "required": false,
+          "text": "55"
+        },
+        "c5_fall_cost_heron": {
+          "label": "Cost per seedling for the fall planting in Heron Shallows",
+          "required": false,
+          "text": "3.00"
+        },
+        "c5_fall_cost_ashby": {
+          "label": "Cost per seedling for the fall planting in Ashby Reach",
+          "required": false,
+          "text": "3.00"
+        },
+        "c5_fall_spread_heron": {
+          "label": "Expected spread of surviving reeds in Year 2 for the fall planting in Heron Shallows",
+          "required": false,
+          "text": "10"
+        },
+        "c5_fall_spread_ashby": {
+          "label": "Expected spread of surviving reeds in Year 2 for the fall planting in Ashby Reach",
+          "required": false,
+          "text": "8"
+        }
+      },
+      "question": "What information is used to determine the total number of reed seedlings, from both plantings, expected to survive their first year in Heron Shallows? Collect the relevant data into the Research Journal.",
+      "explanation": "Only Heron Shallows matters, so the Ashby Reach column of both tables can be ignored; and only the first year matters, so the Year 2 spread rows can be ignored. The cost rows are about money, not seedlings. Surviving seedlings = seedlings from the spring planting + seedlings from the fall planting, and each = plots planted × seedlings per plot × first-year survival rate. So the six items needed are, for Heron Shallows in both tables: plots planted, seedlings per plot, and expected first-year survival. (Not asked for, but as a check: 12 × 150 × 70% + 6 × 200 × 60% = 1,980 seedlings.)"
+    },
+    {
+      "number": 6,
+      "skill": "chart-choice",
+      "mechanism": "dropdowns",
+      "calculator": false,
+      "prompt": "Researchers want to know whether Marsh Frogs call more on warmer nights. On eight survey nights at Heron Shallows they recorded the water temperature and the number of frogs heard calling:",
+      "data": [
+        {
+          "kind": "table",
+          "header": [
+            "Survey night",
+            "Water temperature (°C)",
+            "Frogs heard calling"
+          ],
+          "rows": [
+            [
+              "Night 1",
+              "8",
+              "12"
+            ],
+            [
+              "Night 2",
+              "11",
+              "18"
+            ],
+            [
+              "Night 3",
+              "15",
+              "30"
+            ],
+            [
+              "Night 4",
+              "9",
+              "14"
+            ],
+            [
+              "Night 5",
+              "18",
+              "41"
+            ],
+            [
+              "Night 6",
+              "13",
+              "25"
+            ],
+            [
+              "Night 7",
+              "20",
+              "48"
+            ],
+            [
+              "Night 8",
+              "12",
+              "20"
+            ]
+          ]
+        }
+      ],
+      "question": "Which chart type best visualizes whether the number of frogs calling is related to the water temperature?",
+      "dropdowns": [
+        {
+          "id": "c6",
+          "label": "Answer",
+          "options": {
+            "line": "Line Graph",
+            "bar": "Bar Chart",
+            "scatter": "Scatterplot",
+            "pie": "Pie Chart"
+          },
+          "answer": "scatter"
+        }
+      ],
+      "explanation": "A scatterplot is the best choice for showing whether two variables are related: each night becomes one point, with temperature along one axis and frogs calling along the other, and any relationship shows as a pattern in the points. A line graph shows trends over time (the nights are not in time order and time is not the question); a bar chart shows the distribution of a dataset at a given time; a pie chart shows the components of a single variable."
+    }
+  ]
+}

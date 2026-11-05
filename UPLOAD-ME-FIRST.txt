@@ -1,0 +1,117 @@
+FULL MOCK TEST — HOW TO UPLOAD THIS SO IT ACTUALLY LANDS
+=========================================================
+CM_MOCK_1, built 5 November 2026
+
+
+THE ONE MISTAKE TO AVOID
+------------------------
+GitHub's web uploader keeps your folders ONLY if you drag the FOLDERS
+themselves. If you open a folder and drag the files out of it, every file
+lands loose in the root and the Mock Test breaks.
+
+So: drag the FIVE FOLDERS and the FIVE LOOSE FILES listed below. Do not
+open any folder first.
+
+
+WHAT TO DRAG
+------------
+From inside this CM_MOCK_1 folder, select all of these together
+(click the first, then Ctrl+A selects everything — that is exactly right):
+
+    FOLDERS          FILES
+    content          index.html
+    redrock          config.js
+    seawolf          shell.css
+    sfl              shell.js
+    tools            UPLOAD-ME-FIRST.txt   (this file - harmless either way)
+
+
+STEP BY STEP
+------------
+1.  Go to github.com and create a NEW, EMPTY repository.
+    Name it exactly:  CM_MOCK_1
+    Make it Public. Do NOT tick "Add a README file".
+
+2.  On the empty repository page, click the words
+        "uploading an existing file"
+
+3.  Open this CM_MOCK_1 folder in File Explorer.
+    Press Ctrl+A to select everything.
+    Drag it all onto the GitHub page in one go.
+
+4.  Wait for the count to finish. It should say 131 files.
+    If it says fewer than 120, something was missed - start again.
+
+5.  Scroll down, click the green "Commit changes" button.
+
+6.  Settings  ->  Pages  ->  Branch: main  ->  Folder: / (root)  ->  Save
+
+7.  Wait two minutes.
+
+
+HOW TO CHECK IT WORKED
+----------------------
+Open:   https://cm-43.github.io/CM_MOCK_1/
+
+You should see the login screen with the heading "Full Mock Test".
+Log in with the username and the TEMPORARY password below. You should see
+the home page with three game cards: Redrock Mock, Sea Wolf Mock, SFL Mock.
+Only Redrock Mock has a Start button.
+
+If you instead open one game's own address, for example
+        https://cm-43.github.io/CM_MOCK_1/redrock/
+it must say "Please open the simulation from your course". That is right:
+the games only run inside the Mock Test page.
+
+
+HOW TO TELL THE UPLOAD WENT IN CORRECTLY
+----------------------------------------
+On the repository's main page you should see EXACTLY this:
+
+    content      (folder)
+    redrock      (folder)
+    seawolf      (folder)
+    sfl          (folder)
+    tools        (folder)
+    UPLOAD-ME-FIRST.txt
+    config.js
+    index.html
+    shell.css
+    shell.js
+
+If you also see a long list of "Microbe 1.png", "Microbe 10.png" and so on
+sitting loose at the top level, the folders were flattened. Start again with
+a fresh empty repository - it is faster than cleaning it up.
+
+
+THE LOGIN
+---------
+    username:  CaseMentorMock1
+    password:  change-me-before-launch
+
+>>> THIS PASSWORD IS A PLACEHOLDER. CHANGE IT BEFORE THE COURSE GOES LIVE. <<<
+
+Anyone can read this repository, so the placeholder protects nothing.
+To set the real password:
+
+  1. Open  https://cm-43.github.io/CM_MOCK_1/tools/make-passcode.html
+     (from the web address, not from a file on your computer: browsers only
+     offer the scrambling on a real web address).
+  2. Type the password you want.
+  3. Copy the long line of letters and numbers it prints.
+  4. Open config.js (the one at the top level of CM_MOCK_1, not one inside
+     a game folder) and paste it between the quote marks after
+     passcodeHash, replacing what is there.
+  5. Change the username on the line above it too, if you want.
+  6. Upload config.js to GitHub (Add file -> Upload files, on the
+     repository's main page).
+
+The three games inside (redrock, seawolf, sfl) have their own login
+switched off: this one login is the only one.
+
+
+WHAT IS NOT IN THIS FOLDER, ON PURPOSE
+--------------------------------------
+Each game's test page, answer-key page, developer tools and READMEs are in
+the separate "dev" folder of the delivery, not here. The paid Mock Test does
+not publish its answer key. Do not upload the dev folder.

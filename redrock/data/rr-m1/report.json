@@ -1,0 +1,133 @@
+{
+  "written": {
+    "skill": "report-target",
+    "template": "At the new feeding rate, the yearly fish loss in Linden Bay is expected to be [[a]] fish. With both measures of the plan in place it falls to [[b]] fish, a reduction of [[c]]%, so the plan [[d]] meet the lake authority's target in Linden Bay.\n\nAt the new feeding rate, the yearly fish loss in Coldwater Arm is expected to be [[e]] fish. With both measures of the plan in place it falls to [[f]] fish, a reduction of [[g]]%, so the plan [[h]] meet the lake authority's target in Coldwater Arm.",
+    "blanks": {
+      "a": {
+        "kind": "number",
+        "answer": 2660,
+        "accept": {
+          "decimals": 0
+        },
+        "explanation": "Yearly fish loss in Linden Bay at the new rate, from Question 2."
+      },
+      "b": {
+        "kind": "number",
+        "answer": 2205,
+        "accept": {
+          "decimals": 0
+        },
+        "explanation": "Yearly fish loss in Linden Bay after the plan, from Question 3."
+      },
+      "c": {
+        "kind": "number",
+        "answer": 17,
+        "accept": {
+          "decimals": 0
+        },
+        "explanation": "From Question 4."
+      },
+      "d": {
+        "kind": "dropdown",
+        "options": {
+          "will": "will",
+          "wont": "won't"
+        },
+        "answer": "wont",
+        "explanation": "Linden Bay's reduction is 17% (Question 4), below the 25% target in the objective, so the plan won't meet it there."
+      },
+      "e": {
+        "kind": "number",
+        "answer": 1353,
+        "accept": {
+          "decimals": 0
+        },
+        "explanation": "Yearly fish loss in Coldwater Arm at the new rate, from Question 2."
+      },
+      "f": {
+        "kind": "number",
+        "answer": 950,
+        "accept": {
+          "decimals": 0
+        },
+        "explanation": "Yearly fish loss in Coldwater Arm after the plan, from Question 3."
+      },
+      "g": {
+        "kind": "number",
+        "answer": 30,
+        "accept": {
+          "decimals": 0
+        },
+        "explanation": "From Question 4."
+      },
+      "h": {
+        "kind": "dropdown",
+        "options": {
+          "will": "will",
+          "wont": "won't"
+        },
+        "answer": "will",
+        "explanation": "Coldwater Arm's reduction is 30% (Question 4), at least the 25% target in the objective, so the plan will meet it there."
+      }
+    }
+  },
+  "chart": {
+    "skill": "chart-choice",
+    "prompt": "Select the best graph to show how the yearly fish loss in Linden Bay and Coldwater Arm after the plan breaks down by basin and cause.",
+    "options": [
+      "bar",
+      "line",
+      "pie"
+    ],
+    "default": "bar",
+    "answer": "pie",
+    "explanation": "The pie chart shows the components of a single variable; the line chart shows trends over time; the bar chart shows the distribution of a dataset at a given time. We want to split one total (all the fish lost across the two basins after the plan) into its four parts by basin and cause, so the pie chart is the most appropriate."
+  },
+  "grid": {
+    "skill": "report-target",
+    "prompt": "Add the relevant information to show how the yearly fish loss in Linden Bay and Coldwater Arm after the plan breaks down by basin and cause.",
+    "columns": [
+      "Linden Bay",
+      "Coldwater Arm"
+    ],
+    "rows": [
+      "Fish taken by cormorants after the plan",
+      "Fish removed by anglers"
+    ],
+    "cells": [
+      [
+        {
+          "id": "g_lind_corm",
+          "answer": 1820,
+          "accept": {
+            "decimals": 0
+          }
+        },
+        {
+          "id": "g_cold_corm",
+          "answer": 572,
+          "accept": {
+            "decimals": 0
+          }
+        }
+      ],
+      [
+        {
+          "id": "g_lind_ang",
+          "answer": 385,
+          "accept": {
+            "decimals": 0
+          }
+        },
+        {
+          "id": "g_cold_ang",
+          "answer": 378,
+          "accept": {
+            "decimals": 0
+          }
+        }
+      ]
+    ],
+    "explanation": "Fish taken by cormorants after the plan come from the working of Question 3 (1,820 and 572); fish removed by anglers from the working of Question 2 (385 and 378). The two rows add up to Question 3's answers, 2,205 and 950."
+  }
+}
