@@ -1,0 +1,148 @@
+{
+ "Sheet1": [
+  {
+   "Name": "Microbe 50",
+   "Rigidity": 7,
+   "Mobility": 3,
+   "Size": 9,
+   "Trait": "Pressure Resistant",
+   "Category": "Existing"
+  },
+  {
+   "Name": "Microbe 41",
+   "Rigidity": 5,
+   "Mobility": 5,
+   "Size": 8,
+   "Trait": "Heat Resistant",
+   "Category": "Existing"
+  },
+  {
+   "Name": "Microbe 46",
+   "Rigidity": 4,
+   "Mobility": 4,
+   "Size": 10,
+   "Trait": "Hydrophilic",
+   "Category": "Existing"
+  },
+  {
+   "Name": "Microbe 4",
+   "Rigidity": 5,
+   "Mobility": 3,
+   "Size": 6,
+   "Trait": "Pressure Resistant",
+   "Category": "Existing"
+  },
+  {
+   "Name": "Microbe 89",
+   "Rigidity": 3,
+   "Mobility": 8,
+   "Size": 5,
+   "Trait": "Aerobic",
+   "Category": "Existing"
+  },
+  {
+   "Name": "Microbe 27",
+   "Rigidity": 4,
+   "Mobility": 8,
+   "Size": 8,
+   "Trait": "Aerobic",
+   "Category": "Existing"
+  },
+  {
+   "Name": "Microbe 47",
+   "Rigidity": 4,
+   "Mobility": 2,
+   "Size": 8,
+   "Trait": "Pressure Resistant",
+   "Category": "Set 1"
+  },
+  {
+   "Name": "Microbe 69",
+   "Rigidity": 6,
+   "Mobility": 4,
+   "Size": 7,
+   "Trait": "Heat Resistant",
+   "Category": "Set 1"
+  },
+  {
+   "Name": "Microbe 97",
+   "Rigidity": 5,
+   "Mobility": 3,
+   "Size": 9,
+   "Trait": "Hydrophilic",
+   "Category": "Set 1"
+  },
+  {
+   "Name": "Microbe 45",
+   "Rigidity": 10,
+   "Mobility": 3,
+   "Size": 3,
+   "Trait": "Aerobic",
+   "Category": "Set 2"
+  },
+  {
+   "Name": "Microbe 62",
+   "Rigidity": 7,
+   "Mobility": 6,
+   "Size": 9,
+   "Trait": "Heat Resistant",
+   "Category": "Set 2"
+  },
+  {
+   "Name": "Microbe 25",
+   "Rigidity": 4,
+   "Mobility": 4,
+   "Size": 9,
+   "Trait": "Hydrophilic",
+   "Category": "Set 2"
+  },
+  {
+   "Name": "Microbe 93",
+   "Rigidity": 6,
+   "Mobility": 4,
+   "Size": 10,
+   "Trait": "Pressure Resistant",
+   "Category": "Set 3"
+  },
+  {
+   "Name": "Microbe 60",
+   "Rigidity": 5,
+   "Mobility": 3,
+   "Size": 4,
+   "Trait": "Aerobic",
+   "Category": "Set 3"
+  },
+  {
+   "Name": "Microbe 13",
+   "Rigidity": 3,
+   "Mobility": 5,
+   "Size": 9,
+   "Trait": "Hydrophilic",
+   "Category": "Set 3"
+  },
+  {
+   "Name": "Microbe 92",
+   "Rigidity": 6,
+   "Mobility": 3,
+   "Size": 7,
+   "Trait": "Heat Resistant",
+   "Category": "Set 4"
+  },
+  {
+   "Name": "Microbe 22",
+   "Rigidity": 4,
+   "Mobility": 4,
+   "Size": 6,
+   "Trait": "Pressure Resistant",
+   "Category": "Set 4"
+  },
+  {
+   "Name": "Microbe 19",
+   "Rigidity": 6,
+   "Mobility": 4,
+   "Size": 9,
+   "Trait": "Hydrophilic",
+   "Category": "Set 4"
+  }
+ ]
+}

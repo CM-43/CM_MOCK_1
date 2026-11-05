@@ -1,0 +1,73 @@
+{
+  "simulation": "Sea Wolf — Mock 1",
+  "title": "Sea Wolf Mock",
+  "timeLimitMinutes": 30,
+  "sliderSpan": 3,
+  "results_mode": "full",
+  "labels": {
+    "timer_paused": "Timer paused",
+    "demo_note": "This is the free demo, which shows your score and percentile only. Our full simulations come with every answer explained in detail."
+  },
+  "benchmark": {
+    "note": "This percentile is our own estimate for this simulation, not a McKinsey figure. McKinsey does not publish its exact scoring, so we score every step of the game, with your final submission at each site carrying the most weight. Candidates who pass typically score in the top quartile, but we recommend aiming for the 90th and above.",
+    "phase_weights": { "step1": 5, "step2": 25, "step3": 20, "step4": 40, "step5": 10 },
+    "zones": [
+      { "from": 0, "label": "Below 70th" },
+      { "from": 70, "label": "Borderline" },
+      { "from": 80, "label": "Likely pass" },
+      { "from": 90, "label": "Comfortable" }
+    ],
+    "percentiles": [[0,1],[20,5],[35,12],[45,20],[55,30],[62,40],[68,50],[74,60],[79,68],[84,75],[88,80],[91,85],[94,90],[96,94],[98,97],[100,99]]
+  },
+  "skills": {
+    "list": [
+      { "id": "block-traits",  "label": "Choose the two characteristics to block" },
+      { "id": "site-fit",      "label": "Judge a microbe's fit for a site" },
+      { "id": "allocate",      "label": "Next site or Return: deciding on one line of information" },
+      { "id": "rank",          "label": "Rank three microbes and pick the best" },
+      { "id": "trio-average",  "label": "Average a trio against the site ranges" }
+    ],
+    "by_step": {
+      "step1": "block-traits",
+      "step2": { "this_site": "site-fit", "next_site": "allocate", "return": "allocate" },
+      "step3": "rank",
+      "step4": "trio-average",
+      "step5": "site-fit"
+    }
+  },
+  "sites": [
+    {
+      "id": 1,
+      "label": "Site 1",
+      "ranges": { "Rigidity": [6, 8], "Mobility": [8, 10], "Size": [2, 4] },
+      "desired": "Hydrophilic",
+      "undesired": "Heat Resistant",
+      "nextSitePreview": { "kind": "undesiredTrait", "trait": "Aerobic" },
+      "step1Expected": { "trait": "Hydrophilic", "attribute": "Mobility", "range": [8, 10] },
+      "step2File": "site-1-step-2.json",
+      "step34File": "site-1-step-3&4.json"
+    },
+    {
+      "id": 2,
+      "label": "Site 2",
+      "ranges": { "Rigidity": [1, 2], "Mobility": [6, 8], "Size": [4, 6] },
+      "desired": "Pressure Resistant",
+      "undesired": "Aerobic",
+      "nextSitePreview": { "kind": "attribute", "name": "Mobility", "range": [2, 4] },
+      "step1Expected": { "trait": "Pressure Resistant", "attribute": "Rigidity", "range": [1, 3] },
+      "step2File": "site-2-step-2.json",
+      "step34File": "site-2-step-3&4.json"
+    },
+    {
+      "id": 3,
+      "label": "Site 3",
+      "ranges": { "Rigidity": [4, 6], "Mobility": [2, 4], "Size": [8, 10] },
+      "desired": "Aerobic",
+      "undesired": "Hydrophilic",
+      "nextSitePreview": null,
+      "step1Expected": { "trait": "Aerobic", "attribute": "Size", "range": [8, 10] },
+      "step2File": "site-3-step-2.json",
+      "step34File": "site-3-step-3&4.json"
+    }
+  ]
+}

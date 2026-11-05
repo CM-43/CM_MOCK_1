@@ -1,0 +1,74 @@
+{
+ "Sheet1": [
+  {
+   "Name": "Microbe 58",
+   "Rigidity": 7,
+   "Mobility": 9,
+   "Size": 3,
+   "Trait": "Hydrophilic"
+  },
+  {
+   "Name": "Microbe 29",
+   "Rigidity": 6,
+   "Mobility": 8,
+   "Size": 5,
+   "Trait": "Pressure Resistant"
+  },
+  {
+   "Name": "Microbe 14",
+   "Rigidity": 8,
+   "Mobility": 10,
+   "Size": 2,
+   "Trait": "Heat Resistant"
+  },
+  {
+   "Name": "Microbe 98",
+   "Rigidity": 5,
+   "Mobility": 9,
+   "Size": 4,
+   "Trait": "Aerobic"
+  },
+  {
+   "Name": "Microbe 71",
+   "Rigidity": 8,
+   "Mobility": 6,
+   "Size": 4,
+   "Trait": "Hydrophilic"
+  },
+  {
+   "Name": "Microbe 90",
+   "Rigidity": 3,
+   "Mobility": 9,
+   "Size": 7,
+   "Trait": "Aerobic"
+  },
+  {
+   "Name": "Microbe 1",
+   "Rigidity": 2,
+   "Mobility": 7,
+   "Size": 5,
+   "Trait": "Pressure Resistant"
+  },
+  {
+   "Name": "Microbe 95",
+   "Rigidity": 6,
+   "Mobility": 10,
+   "Size": 8,
+   "Trait": "Aerobic"
+  },
+  {
+   "Name": "Microbe 81",
+   "Rigidity": 4,
+   "Mobility": 3,
+   "Size": 3,
+   "Trait": "Aerobic"
+  },
+  {
+   "Name": "Microbe 70",
+   "Rigidity": 1,
+   "Mobility": 6,
+   "Size": 6,
+   "Trait": "Heat Resistant"
+  }
+ ]
+}
