@@ -245,7 +245,14 @@
     try { return !!(document.fullscreenEnabled && document.documentElement.requestFullscreen); }
     catch (e) { return false; }
   }
+  /* Full Mock Test, fix round 1 (D37): in the Mock Test the shell owns full
+     screen. The button asks the shell, and the shell says whether its page is
+     in full screen (this frame's own document.fullscreenElement stays empty
+     when the parent page is the full-screen one). */
+  var shellFullscreen = false;
+  function isFullscreen() { return SHELL ? shellFullscreen : !!document.fullscreenElement; }
   function toggleFullscreen() {
+    if (SHELL) { postToShell({ type: 'mock-fullscreen', game: CONFIG.mockGameId }); return; }
     if (document.fullscreenElement) document.exitFullscreen();
     else document.documentElement.requestFullscreen().catch(function () {});
   }
@@ -307,12 +314,26 @@
       '<h1>Saved.</h1><p class="lede">Returning to the Mock Test…</p></div></div>';
     else html = resultsHTML();
     html += dialogHTML();
+    /* Full Mock Test, fix round 1 (D34): every redraw rebuilds the screen, so
+       a box the candidate had scrolled would jump back to the top. Each box
+       that can scroll carries data-scroll="<what it shows>"; its position is
+       noted before the redraw and put back after it, as Redrock and Sea Wolf
+       do. A box whose key is not on the new screen simply starts at the top. */
+    var scrolls = {};
+    Array.prototype.forEach.call(app.querySelectorAll('[data-scroll]'), function (el) {
+      scrolls[el.getAttribute('data-scroll')] = el.scrollTop;
+    });
     app.innerHTML = html;
     /* Two screens hold themselves at a fixed height, worked out from what is
        on them, so that nothing resizes as the candidate works. Both are done
        here, before the browser paints, so nothing is ever seen to jump. */
     applySeriesHeight();
     sizeRankCards();
+    /* D34: put the scroll positions back once the sizes above are set */
+    Array.prototype.forEach.call(app.querySelectorAll('[data-scroll]'), function (el) {
+      var top = scrolls[el.getAttribute('data-scroll')];
+      if (top) el.scrollTop = top;
+    });
     paintTimer();
     if (state.phase === 'login') {
       var u = byId('u');
@@ -433,7 +454,7 @@
   }
 
   function toolsHTML() {
-    var isBig = !!document.fullscreenElement;
+    var isBig = isFullscreen();   /* fix round 1 (D37): the shell's state in the Mock Test */
     return '<div class="g-tools">' +
       (SHELL ? '' :   /* Full Mock Test: no Restart inside the shell */
         '<button class="btn-quiet" data-act="restart">' + esc(L('restart')) + '</button>') +
@@ -588,7 +609,7 @@
           '<div class="brief-a">' + textToHtml(q.answer) + '</div></div>';
       }).join('');
       return '<div class="card-wrap is-tall"><section class="gcard is-wide">' +
-        '<div class="gc-scroll"><h1>' + esc(ob.brief_heading) + '</h1><div class="brief-grid">' + items + '</div></div>' +
+        '<div class="gc-scroll" data-scroll="card-' + esc(cardScreenKey()) + '"><h1>' + esc(ob.brief_heading) + '</h1><div class="brief-grid">' + items + '</div></div>' +
         '<div class="gc-actions is-right"><button class="btn" data-act="card-next">' + esc(L('understood')) + '</button></div></section></div>';
     }
     var day = currentDay(), n = s.day + 1;
@@ -761,7 +782,7 @@
     }).join('');
     var complete = order.every(function (x) { return !!x; });
     return '<div class="card-wrap is-tall"><section class="gcard is-wide">' +
-      '<div class="gc-scroll"><h1>' + esc(ob.rank_heading) + '</h1>' +
+      '<div class="gc-scroll" data-scroll="card-' + esc(cardScreenKey()) + '"><h1>' + esc(ob.rank_heading) + '</h1>' +   /* D34 */
       '<p class="gc-lede">' + textToHtml(ob.rank_instruction) + '</p>' +
       '<div class="rank-layout"><div class="rank-side"><div class="rank-pool" data-rank-pool="1" data-act="rank-pool">' + pool + '</div>' +
       '<p class="rank-hint muted">' + esc(L('drag_hint')) + '</p></div>' +
@@ -799,7 +820,7 @@
     var ob = content().onboarding;
     return '<div class="side-panel is-rank" role="dialog" aria-label="' + esc(L('help')) + '"><div class="sp-head"><b>' + esc(L('help')) + '</b>' +
       '<button class="sp-close" data-act="panel-close" aria-label="' + esc(L('close')) + '">×</button></div>' +
-      '<div class="sp-body"><h3 class="sp-h">' + esc(L('help_instructions')) + ': ' + esc(L('phase_onboarding')) + '</h3>' +
+      '<div class="sp-body" data-scroll="panel-help-onboarding"><h3 class="sp-h">' + esc(L('help_instructions')) + ': ' + esc(L('phase_onboarding')) + '</h3>' +
       '<div class="sp-text">' + paras(ob.rank_instruction) + paras(L('drag_hint')) + '</div>' +
       '<h3 class="sp-h">' + esc(L('help_definitions')) + '</h3><dl class="sp-defs">' + definitionsHTML() + '</dl></div></div>';
   }
@@ -949,7 +970,7 @@
         return '<td' + (col.idk ? ' class="is-idk"' : '') + '><button class="radio-cell' + (on ? ' is-on' : '') + '" data-act="reflect-pick" data-person="' + esc(p.id) + '" data-id="' + esc(col.id) + '" role="radio" aria-checked="' + on + '" aria-label="' + esc(p.name + ': ' + col.label) + '"><span class="radio"></span></button></td>';
       }).join('') + '</tr>';
     }).join('');
-    return '<div class="reflect-panel"><div class="reflect-inner">' +
+    return '<div class="reflect-panel" data-scroll="reflect-day' + state.step.day + '"><div class="reflect-inner">' +   /* D34: keeps its place */
       '<h2>' + esc(rf.heading) + '</h2><p class="reflect-prompt">' + esc(rf.prompt) + '</p>' +
       '<table class="reflect-table"><thead>' + head + '</thead><tbody>' + body + '</tbody></table></div></div>';
   }
@@ -961,7 +982,11 @@
     var title = L(which === 'notes' ? 'notes' : 'help');
     return '<div class="side-panel" role="dialog" aria-label="' + esc(title) + '"><div class="sp-head"><b>' + esc(title) + '</b>' +
       '<button class="sp-close" data-act="panel-close" aria-label="' + esc(L('close')) + '">×</button></div>' +
-      '<div class="sp-body">' + (which === 'notes' ? notesHTML() : helpHTML()) + '</div></div>';
+      /* D34: the key names what the panel is showing, so a different tab or
+         person opens at the top and the same one keeps its place */
+      '<div class="sp-body" data-scroll="' + esc(which === 'notes'
+        ? 'panel-notes-' + state.ui.notesTab + '-' + (state.ui.notesPick[state.ui.notesTab] || '')
+        : 'panel-help-' + state.step.phase) + '">' + (which === 'notes' ? notesHTML() : helpHTML()) + '</div></div>';
   }
   function helpHTML() {
     var day = currentDay();
@@ -1076,7 +1101,11 @@
         '<h2>' + esc(qp.name) + '</h2><div class="qc-text">' + paras(qi.message) + '</div></div>' +
         '<div class="qc-pills">' + right + '</div>';
     }
-    return '<div class="card-layer' + (steadyModal ? ' is-steady' : '') + '"><div class="' + cls + '" role="dialog">' + inner + '</div></div>';
+    /* D34: the card keeps its scroll while the same card is redrawn; once
+       its content changes (an answer or an outcome is shown) the key changes
+       and it opens at the top, so the new text is never half hidden. */
+    var cardKey = 'card-' + modalKey(m) + '|' + (m.answered || m.chosen || '');
+    return '<div class="card-layer' + (steadyModal ? ' is-steady' : '') + '"><div class="' + cls + '" role="dialog" data-scroll="' + esc(cardKey) + '">' + inner + '</div></div>';
   }
 
   /* House popups over everything (v1 markup). */
@@ -1090,8 +1119,12 @@
         '<button class="btn" data-act="restart-confirm">' + esc(L('restart')) + '</button></div></div>');
     }
     if (d.type === 'finish') {
+      /* Full Mock Test, fix round 1 (D36): inside the Mock Test this button
+         does not show results (the game says "Saved. Returning to the Mock
+         Test…"), so it must not say "See Your Results". */
+      var finishLabel = SHELL ? L('finish_button_shell', null, 'Finish') : L('finish_button');
       return backdrop('<div class="modal"><div class="modal-body"><h2>' + esc(L('finish_title')) + '</h2></div>' +
-        '<div class="modal-actions"><button class="btn" data-act="see-results">' + esc(L('finish_button')) + '</button></div></div>');
+        '<div class="modal-actions"><button class="btn" data-act="see-results">' + esc(finishLabel) + '</button></div></div>');
     }
     return '';
   }
@@ -1798,6 +1831,10 @@
       state.phase = 'results';
       window.scrollTo(0, 0);
       render();
+    }
+    if (data.type === 'mock-fullscreen-state' && !!data.on !== shellFullscreen) {   /* fix round 1 (D37) */
+      shellFullscreen = !!data.on;          /* redraw only on a change: the button's icon follows */
+      if (state) { if (drag) renderAfterDrag = true; else render(); }
     }
   });
 

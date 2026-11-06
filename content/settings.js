@@ -8,8 +8,9 @@
 
    Safe to edit: title, intro_line, a game's title or minutes (they must
    match the game's own content file: the build checks this), the weights,
-   export_label. Do not change an id or a folder: they name the game's
-   folder and the id the game sends with its result (its config.js
+   export_label, results_email, results_subject. Do not change an id or a
+   folder: they name the game's folder and the id the game sends with its
+   result (its config.js
    "mockGameId").
    ========================================================================== */
 window.MOCK_SETTINGS = {
@@ -32,5 +33,13 @@ window.MOCK_SETTINGS = {
   weights: { "rr-m1": 1, "sw-m1": 1, "sfl-m1": 1 },
 
   /* The Mock Test version, printed at the top of the exported results. */
-  export_label: "Mock 1"
+  export_label: "Mock 1",
+
+  /* Where the "Email us your results" button on the results page sends the
+     candidate's email, and its subject line (the Mock Test version above is
+     added to the end of the subject, e.g. "Full Mock Test results — Mock 1").
+     The email program opens with these filled in; the candidate attaches the
+     downloaded results file themselves. */
+  results_email: "results@psgsecrets.com",
+  results_subject: "Full Mock Test results"
 };

@@ -56,14 +56,14 @@
     "to_report": {
       "title": "Do you want to move to the Report?",
       "text": "You won't be able to change your answer",
-      "back": "Back to the question",
+      "back": "Back to the Review",
       "go": "Move to Report"
     },
     "next_section": {
-      "title": "Do you want to move to the next section?",
+      "title": "Do you want to move to the next question?",
       "text": "You won't be able to change your answer",
       "back": "Back to the question",
-      "go": "Move to next section"
+      "go": "Move forward"
     },
     "cases_tutorial": {
       "title": "Moving to the Cases",
@@ -75,6 +75,30 @@
       "text": "You won't be able to change your answer",
       "back": "Back to question",
       "go": "Move forward"
+    },
+    "to_review": {
+      "title": "Do you want to move to the Review?",
+      "text": "You won't be able to change your answer",
+      "back": "Back to the question",
+      "go": "Move to Review"
+    },
+    "next_section_graph": {
+      "title": "Do you want to move to the next question?",
+      "text": "You can come back to the Graph and change the chart until you complete the Report.",
+      "back": "Back to the Graph",
+      "go": "Move forward"
+    },
+    "complete_report": {
+      "title": "Do you want to complete the Report?",
+      "text": "You won't be able to change your answers",
+      "back": "Back to the Report",
+      "go": "Complete report"
+    },
+    "finish": {
+      "title": "Do you want to finish the study?",
+      "text": "You won't be able to change your answers",
+      "back": "Back to question",
+      "go": "Finish Study"
     },
     "restart": {
       "title": "Restart the simulation?",

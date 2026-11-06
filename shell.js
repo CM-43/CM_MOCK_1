@@ -185,10 +185,28 @@
       document.documentElement.requestFullscreen().catch(function () {});
     }
   }
-  /* A game's own full-screen button puts its FRAME in full screen. When that
-     game ends and its frame is hidden, the screen would go blank, so the
-     shell takes full screen over itself (or leaves it, if the browser says
-     no), and the sitting stays in full screen between games. */
+  /* Fix round 1 (D37): the shell is the ONLY owner of full screen. A game's
+     own full-screen button no longer calls full screen itself in the Mock
+     Test: it sends "mock-fullscreen" here, and the shell puts its whole page
+     in full screen (the click inside the frame counts for this page too).
+     The shell then tells every game frame whether it is in full screen
+     ("mock-fullscreen-state"), on every change (the button, Esc) and as soon
+     as a game says it is ready, so each game's button shows the right icon.
+     Because the full-screen element is always this page, nothing has to be
+     handed over when a game ends, nothing flashes, and the review bar is
+     never covered by a frame. */
+  function sendFullscreenState(onlyTo) {
+    var on = !!document.fullscreenElement;
+    state.games.forEach(function (g) {
+      if (!g.frame || !g.frame.contentWindow || (onlyTo && onlyTo !== g)) return;
+      try { g.frame.contentWindow.postMessage({ type: 'mock-fullscreen-state', on: on }, location.origin); } catch (e) { /* nothing */ }
+    });
+  }
+
+  /* Before fix round 1 a game's own full-screen button put its FRAME in full
+     screen, and this took full screen over to the shell when that game ended.
+     The games no longer do that in the Mock Test (see above), so this never
+     finds a frame in full screen now; it stays only as a harmless fallback. */
   function keepFullscreenOnShell() {
     var el = document.fullscreenElement;
     if (!el || el.tagName !== 'IFRAME') return;
@@ -199,7 +217,8 @@
     }
   }
   document.addEventListener('fullscreenchange', function () {
-    if (state.phase === 'home' || state.phase === 'results') render();
+    sendFullscreenState();                                         /* D37 */
+    if (state.phase === 'home' || state.phase === 'results' || state.phase === 'review') render();
   });
 
   /* ====================================================================== *
@@ -273,6 +292,11 @@
     if (data.type === 'mock-ready') {
       g.ready = true;
       try { event.source.postMessage({ type: 'mock-ack' }, location.origin); } catch (e) { /* nothing */ }
+      sendFullscreenState(g);                                      /* D37: the game's button starts right */
+      return;
+    }
+    if (data.type === 'mock-fullscreen') {                         /* D37: a game's full-screen button */
+      toggleFullscreen();
       return;
     }
     if (data.type === 'mock-game-finished') {
@@ -302,8 +326,13 @@
   /* Leaving the page loses everything (plan D3), so the browser is asked to
      warn. Whether the warning shows inside the lesson's frame is up to the
      browser; see the delivery note. */
+  /* D38: some browsers treat a click on a mail link as leaving the page and
+     would show "Leave the Mock Test?" although the page stays. For one second
+     after "Email us your results" is clicked the warning is not asked for. */
+  var mailingUntil = 0;
   window.addEventListener('beforeunload', function (event) {
     if (!state.loggedIn) return;
+    if (Date.now() < mailingUntil) return;
     event.preventDefault();
     event.returnValue = 'Leave the Mock Test? Nothing is saved.';
     return event.returnValue;
@@ -314,7 +343,8 @@
    * results page and the export, so the two always agree.
    *
    * A summary: { score, of, weighted, percentile, limitSeconds, leftSeconds,
-   *   minutesUsed, ranOut, late, phases: [{ name, scoreText, timeText }],
+   *   minutesUsed, ranOut, late, phases: [{ name, scoreText, timeText,
+   *   score, of, extra }],
    *   rows: [{ where, what, tag, state, points, detail, late }] }
    * ====================================================================== */
 
@@ -378,7 +408,8 @@
                   [r.report.score, r.report.of], [r.casesScore, r.casesOf]];
     for (var p = 0; p < 4; p++) {
       sum.phases.push({ name: names[p], scoreText: showScore(scores[p][0]) + '/' + showScore(scores[p][1]),
-                        timeText: phaseTime(markOf(marks, order[p]), markOf(marks, order[p + 1]), true) });
+                        timeText: phaseTime(markOf(marks, order[p]), markOf(marks, order[p + 1]), true),
+                        score: scores[p][0], of: scores[p][1], extra: '' });   /* D40: for the results card */
     }
     var rows = sum.rows;
     var items = c.investigation.items;
@@ -536,8 +567,15 @@
                    'Step 3 ' + sr.step3.correct + '/' + sr.step3.of,
                    'Step 4 ' + sr.step4.score + '% (best ' + (sr.step4.bestOverall === null ? '—' : sr.step4.bestOverall + '%') + ')'];
       if (sr.step5.applicable) parts.push('Step 5 ' + sr.step5.correct + '/' + sr.step5.of);
+      /* D40: the results card shows a site as decisions correct / decisions
+         asked (Steps 1, 2, 3 and, where there is one, 5, added up) and the
+         Step 4 score against the best possible beside the site's name. */
+      var dScore = sr.step1.correct + sr.step2.correct + sr.step3.correct + (sr.step5.applicable ? sr.step5.correct : 0);
+      var dOf = sr.step1.of + sr.step2.of + sr.step3.of + (sr.step5.applicable ? sr.step5.of : 0);
       sum.phases.push({ name: here, scoreText: parts.join(' · '),
-                        timeText: phaseTime(markOf(marks, 'start:' + id), markOf(marks, 'end:' + id), false) });
+                        timeText: phaseTime(markOf(marks, 'start:' + id), markOf(marks, 'end:' + id), false),
+                        score: dScore, of: dOf,
+                        extra: sr.step4.score + '%' + (sr.step4.bestOverall === null ? '' : ' of ' + sr.step4.bestOverall + '%') });
 
       var rows = sum.rows;
       /* Step 1: the two characteristics, trait first. */
@@ -615,7 +653,8 @@
     var ob = r.onboarding;
     sum.phases.push({ name: L('progress_onboarding', 'Onboarding'),
                       scoreText: showScore(ob.score) + '/' + showScore(ob.of),
-                      timeText: phaseTime(markOf(marks, 'onboarding'), markOf(marks, 'day0'), false) });
+                      timeText: phaseTime(markOf(marks, 'onboarding'), markOf(marks, 'day0'), false),
+                      score: ob.score, of: ob.of, extra: '' });              /* D40 */
     ob.items.forEach(function (it) {
       rows.push({ where: L('progress_onboarding', 'Onboarding'), what: short(it.question.text, 72),
                   tag: tagLabel(tags, byPhase.onboarding),
@@ -637,7 +676,8 @@
       });
       sum.phases.push({ name: dayName, scoreText: parts.join(' · '),
                         timeText: phaseTime(markOf(marks, 'day' + di),
-                                            markOf(marks, di + 1 < c.days.length ? 'day' + (di + 1) : 'end'), false) });
+                                            markOf(marks, di + 1 < c.days.length ? 'day' + (di + 1) : 'end'), false),
+                        score: Math.round(ds * 100) / 100, of: Math.round(dof * 100) / 100, extra: '' });   /* D40: the day's phases added up */
 
       if (dres.explore) {
         var where = dayName + ' ' + L('phase_explore', 'Explore'), etag = tagLabel(tags, byPhase.explore);
@@ -897,7 +937,7 @@
             '<span class="standing-word">percentile</span>' +
           '</div>' +
           '<div class="standing-pill">Decile ' + decile + ' · ' + (100 - p) + '% scored better</div>' +
-          '<p class="standing-sentence">Estimated overall: the average of your three game percentiles.</p>' +
+          '<p class="standing-sentence">Estimated overall standing across the three games.</p>' +   /* D39 */
         '</div>' +
         '<div class="standing-right">' +
           '<div class="band" role="img" aria-label="Decile band, you are at the ' + p + ordinal(p) + ' percentile">' +
@@ -913,30 +953,59 @@
         '</div>' +
       '</div>' +
       '<p class="standing-note">Each game’s percentile is our own estimate from that game’s score, ' +
-        'not a McKinsey figure. The overall figure is the average of the three.</p>' +
+        'not a McKinsey figure.</p>' +   /* D39: how the overall is added up is no longer spelled out */
     '</section>';
+  }
+
+  /* D38: the "Email us your results" link. The address and the subject come
+     from content/settings.js; the Mock label is added to the subject. A mail
+     link can fill in the address, subject and body, but cannot attach a file. */
+  function mailtoHref() {
+    var to = S.results_email || '';
+    var subject = (S.results_subject || (S.title + ' results')) + ' — ' + S.export_label;
+    var body = 'My ' + S.title + ' results are attached.';
+    return 'mailto:' + encodeURI(to) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  }
+
+  /* D40: one game's card on the results page. Top to bottom: the title and a
+     percentile pill coloured by its zone (the same zones and tones as "Where
+     you stand"); the score as the one big number; the weighted score; the
+     time used and the answers after time; then one row per phase (name,
+     score, time) with a thin bar for score / out of; then "Open review".
+     The per-step detail lines stay in the export and in the game's own
+     review, not on the card. */
+  function percentilePill(p) {
+    if (typeof p !== 'number') return '<span class="gr-pill tone-grey">no percentile</span>';
+    var zones = sharedZones(), zi = zoneIndexOf(p, zones);
+    var tone = zi >= 0 ? zoneTone(zi, zones.length) : 'grey';
+    return '<span class="gr-pill tone-' + tone + '">' + p + ordinal(p) + ' percentile</span>';
+  }
+  function gameCardHtml(g, s, i) {
+    var phases = s.phases.map(function (p) {
+      var share = (typeof p.of === 'number' && p.of > 0) ? Math.max(0, Math.min(1, p.score / p.of)) : 0;
+      return '<div class="gr-phase">' +
+               '<span class="ph-name">' + esc(p.name) +
+                 (p.extra ? '<span class="ph-extra"> · ' + esc(p.extra) + '</span>' : '') + '</span>' +
+               '<span class="ph-score">' + (typeof p.score === 'number' ? showScore(p.score) + ' / ' + showScore(p.of) : '—') + '</span>' +
+               '<span class="ph-time">' + esc(String(p.timeText).replace('under 1 min', '<1 min')) + '</span>' +
+               '<span class="ph-bar" aria-hidden="true"><i style="width:' + (Math.round(share * 1000) / 10) + '%"></i></span>' +
+             '</div>';
+    }).join('');
+    return '<div class="game-result" data-result="' + esc(g.id) + '">' +
+      '<div class="gr-head"><h2>' + esc(g.title) + '</h2>' + percentilePill(s.percentile) + '</div>' +
+      '<div class="gr-score">' + showScore(s.score) + ' / ' + showScore(s.of) + '</div>' +
+      '<div class="gr-line gr-weighted">Weighted ' + (typeof s.weighted === 'number' ? s.weighted.toFixed(1) : '—') + ' / 100</div>' +
+      '<div class="gr-line gr-time">' + s.minutesUsed + ' of ' + Math.round(s.limitSeconds / 60) + ' min · ' +
+        s.late + (s.late === 1 ? ' answer' : ' answers') + ' after time' + (s.ranOut ? ' · time ran out' : '') + '</div>' +
+      '<div class="gr-phases">' + phases + '</div>' +
+      '<div class="gr-foot"><button class="btn" type="button" data-act="review" data-i="' + i + '">Open review</button></div>' +
+    '</div>';
   }
 
   function resultsHtml() {
     var summaries = state.games.map(summaryOf);
     var o = overall(summaries);
-    var cards = state.games.map(function (g, i) {
-      var s = summaries[i];
-      return '<div class="game-result" data-result="' + esc(g.id) + '">' +
-        '<h2>' + esc(g.title) + '</h2>' +
-        '<div class="gr-score">' + showScore(s.score) + ' / ' + showScore(s.of) + '</div>' +
-        '<div class="gr-line">Weighted <b>' + (typeof s.weighted === 'number' ? s.weighted.toFixed(1) : '—') + ' / 100</b></div>' +
-        '<div class="gr-line"><b>' + (typeof s.percentile === 'number' ? s.percentile + ordinal(s.percentile) : '—') + '</b> percentile</div>' +
-        '<div class="gr-line">Time used <b>' + s.minutesUsed + ' of ' + Math.round(s.limitSeconds / 60) + ' min</b>' +
-          (s.ranOut ? ' (time ran out)' : '') + '</div>' +
-        '<div class="gr-line">Answers after time ran out: <b>' + s.late + '</b></div>' +
-        '<ul class="gr-phases">' + s.phases.map(function (p) {
-          return '<li><span><b>' + esc(p.name) + '</b> ' + esc(p.scoreText) + '</span>' +
-                 '<span class="ph-time">' + esc(p.timeText) + '</span></li>';
-        }).join('') + '</ul>' +
-        '<div class="gr-foot"><button class="btn" type="button" data-act="review" data-i="' + i + '">Open review</button></div>' +
-      '</div>';
-    }).join('');
+    var cards = state.games.map(function (g, i) { return gameCardHtml(g, summaries[i], i); }).join('');
     var exportBox = state.exportShown
       ? '<textarea id="export-text" readonly spellcheck="false" aria-label="Your results as text">' + esc(exportText()) + '</textarea>'
       : '';
@@ -945,16 +1014,21 @@
         '<div class="results-actions">' + fullscreenButton() + '</div></div>' +
       standingHtml(o) +
       '<div class="game-results">' + cards + '</div>' +
+      /* D38: download first, then an email link to us (the browser cannot
+         attach the file, so the page says to), then copying as text as a
+         quiet fallback, and the new-tab link. */
       '<section class="export">' +
         '<h2>Your results for the personal review</h2>' +
-        '<p>Copy or download your results and send them to us for your personal result review. ' +
+        '<p>Download your results and email the file to us for your personal result review. ' +
           'They are not saved anywhere else: if you close or refresh this page, they are gone.</p>' +
         '<div class="export-actions">' +
-          '<button class="btn" type="button" data-act="copy">Copy my results</button>' +
           '<button class="btn" type="button" data-act="download">Download results (.txt)</button>' +
+          '<a class="btn-quiet export-email" href="' + esc(mailtoHref()) + '" data-act="email">Email us your results</a>' +
+          '<a href="#" class="export-copy" data-act="copy">Copy as text instead</a>' +
           '<a href="#" data-act="open-tab">Open the results in a new tab</a>' +
           '<span class="export-said" id="export-said">' + esc(state.exportSaid) + '</span>' +
         '</div>' +
+        '<p class="export-attach">Attach the downloaded file to the email.</p>' +
         exportBox +
       '</section>' +
     '</div></div>';
@@ -965,6 +1039,7 @@
     return '<div class="review-bar">' +
       '<button class="btn-quiet" type="button" data-act="back-to-results">← Back to results</button>' +
       '<span class="review-title">' + esc(g.title) + '</span>' +
+      '<span class="review-tools">' + fullscreenButton() + '</span>' +   /* D37: the shell's own button */
     '</div>';
   }
 
@@ -1061,6 +1136,7 @@
         return;
       }
       case 'download': event.preventDefault(); downloadText(); return;
+      case 'email': mailingUntil = Date.now() + 1000; return;     /* D38: the link opens the mail program itself */
       case 'open-tab': {
         event.preventDefault();
         var w = window.open(blobUrl(), '_blank');

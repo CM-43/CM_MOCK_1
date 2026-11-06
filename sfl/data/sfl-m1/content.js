@@ -221,6 +221,7 @@ window.SFL_CONTENT = {
     // End and results
     finish_title: "You have completed the simulation",
     finish_button: "See Your Results",
+    finish_button_shell: "Finish",   // Full Mock Test only: the same button inside the Mock Test, where no results follow
     results_title: "Your result",
     print: "Print",
     csv: "Download CSV",

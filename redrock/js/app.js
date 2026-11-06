@@ -107,6 +107,15 @@
     phaseMarks.push({ phase: name, secondsLeft: state.timer.secondsLeft, at: Date.now() });
   }
 
+  /* Full Mock Test, fix round 1 (D37): in the Mock Test the shell owns full
+     screen. The button below asks the shell, and the shell says whether its
+     page is in full screen (this frame's own document.fullscreenElement stays
+     empty when the parent page is the full-screen one). */
+  var shellFullscreen = false;
+  function isFullscreen() {
+    return SHELL ? shellFullscreen : !!document.fullscreenElement;
+  }
+
   function savedHtml() {
     return '<div class="centre-screen"><div class="panel">' +
              '<h1>Saved.</h1>' +
@@ -519,10 +528,17 @@
        from the content file so the next version can say it differently; the
        icon is drawn by the program. */
     var hint = state.content.version.labels.journal_mark_hint;
+    /* Full Mock Test, fix round 1 (D34): the journal list keeps its scroll
+       position when the screen is redrawn (a drag, a mark, a dropdown), the
+       same way the question and case columns already do, through
+       rememberScroll() / restoreScroll(). The Investigation's journal and a
+       collect case's own journal are different lists, so they get different
+       keys: one must never open at the other's position. */
+    var scrollKey = list === state.journal ? 'journal' : 'journal-case-' + state.cases.current;
     return '<div class="journal">' +
              '<h2>Research Journal</h2>' +
              (hint ? '<p class="journal-hint">' + hintWithIcon(hint) + '</p>' : '') +
-             '<div class="journal-list" data-drop=\'' +
+             '<div class="journal-list" data-scroll="' + attr(scrollKey) + '" data-drop=\'' +
                attr(JSON.stringify({ target: 'journal' })) + '\'>' + rows + '</div>' +
            '</div>';
   }
@@ -1100,7 +1116,7 @@
   }
 
   function fullscreenIcon() {
-    var on = !!document.fullscreenElement;
+    var on = isFullscreen();               /* fix round 1 (D37): the shell's state in the Mock Test */
     return on
       ? '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" ' +
         'stroke-width="1.6"><path d="M6 1v5H1M10 15v-5h5"/></svg>'
@@ -1553,7 +1569,7 @@
                '<div class="graph-cards">' + rows + '</div>';
     return screenHtml({
       body: body,
-      scrollKey: 'report',
+      scrollKey: 'report-graph',    /* fix round 1 (D34): own key, see the Visual page */
       button: state.content.version.buttons.next_section,
       side: journalHtml(state.journal, 'Nothing was collected during the Investigation.')
     });
@@ -1635,7 +1651,8 @@
 
     return screenHtml({
       body: body,
-      scrollKey: 'report',
+      scrollKey: 'report-visual',   /* fix round 1 (D34): the Graph page used to share 'report', so
+                                       going to the Graph and back opened this page at the top */
       button: state.content.version.buttons.complete_report,
       side: journalHtml(state.journal, 'Nothing was collected during the Investigation.')
     });
@@ -2974,11 +2991,24 @@
     render();
   }
 
+  /* Full Mock Test, fix round 1 (D35): some moves now have a popup of their
+     own, so that what it says is true (the last question leads to the Review,
+     not a question; the Graph CAN be reached again from the Visual page; the
+     last case ends the study). openPopup() shows nothing when a key is
+     missing, which would leave the candidate stuck, so a content file
+     without the new key falls back to the old one. */
+  function popupKey(wanted, fallback) {
+    var popups = state.content.version.popups || {};
+    return popups[wanted] ? wanted : fallback;
+  }
+
   function primaryAction() {
     if (state.phase === 'investigation') {
       openPopup('to_analysis', { onGo: goAnalysis });
     } else if (state.phase === 'analysis') {
-      openPopup('next_question', { onGo: nextQuestion });
+      var questions = state.content.analysis.questions;
+      var lastQuestion = questions.length && questions[questions.length - 1].number === state.analysis.current;
+      openPopup(lastQuestion ? popupKey('to_review', 'next_question') : 'next_question', { onGo: nextQuestion });
     } else if (state.phase === 'review') {
       openPopup('to_report', {
         onGo: function () {
@@ -3004,13 +3034,14 @@
       if (!state.report.chart) {
         state.report.chart = stamp(state.content.report.chart['default']);
       }
-      openPopup('next_section', {
+      openPopup(popupKey('next_section_graph', 'next_section'), {
         onGo: function () { state.phase = 'report_visual'; render(); }
       });
     } else if (state.phase === 'report_visual') {
-      openPopup('next_section', { onGo: goCases });
+      openPopup(popupKey('complete_report', 'next_section'), { onGo: goCases });
     } else if (state.phase === 'cases') {
-      openPopup('next_case', { onGo: nextCase });
+      var lastCase = state.cases.current >= state.content.cases.cases.length;   /* as nextCase() decides */
+      openPopup(lastCase ? popupKey('finish', 'next_case') : 'next_case', { onGo: nextCase });
     }
   }
 
@@ -3193,6 +3224,11 @@
     },
 
     'fullscreen': function () {
+      /* Full Mock Test, fix round 1 (D37): the shell puts its whole page in
+         full screen (the click counts for the parent page too), so this frame
+         is never the full-screen element and nothing has to be handed over
+         when the game ends. */
+      if (SHELL) { postToShell({ type: 'mock-fullscreen', game: CONFIG.mockGameId }); return; }
       if (document.fullscreenElement) {
         if (document.exitFullscreen) document.exitFullscreen();
       } else if (document.documentElement.requestFullscreen) {
@@ -3513,6 +3549,10 @@
     if (data.type === 'mock-show-results' && state && state.result) {
       state.phase = 'results';
       render();
+    }
+    if (data.type === 'mock-fullscreen-state' && !!data.on !== shellFullscreen) {   /* fix round 1 (D37) */
+      shellFullscreen = !!data.on;          /* redraw only on a change: the button's icon follows */
+      if (state) render();
     }
   });
 
