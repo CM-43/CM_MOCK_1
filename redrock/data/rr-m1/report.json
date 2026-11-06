@@ -73,7 +73,7 @@
   },
   "chart": {
     "skill": "chart-choice",
-    "prompt": "Select the best graph to show how the yearly fish loss in Linden Bay and Coldwater Arm after the plan breaks down by basin and cause.",
+    "prompt": "Select the best graph to show how the total yearly fish loss across Linden Bay and Coldwater Arm after the plan breaks down by basin and cause.",
     "options": [
       "bar",
       "line",
@@ -85,7 +85,7 @@
   },
   "grid": {
     "skill": "report-target",
-    "prompt": "Add the relevant information to show how the yearly fish loss in Linden Bay and Coldwater Arm after the plan breaks down by basin and cause.",
+    "prompt": "Add the relevant information to show how the total yearly fish loss across Linden Bay and Coldwater Arm after the plan breaks down by basin and cause.",
     "columns": [
       "Linden Bay",
       "Coldwater Arm"

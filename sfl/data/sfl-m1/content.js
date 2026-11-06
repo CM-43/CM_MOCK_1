@@ -443,7 +443,7 @@ window.SFL_CONTENT = {
         },
         stations: {
           reedbed: {
-            work:  { text: "Researchers will set reed shoots in rows along the northern shore and measure the water around each row while the roots take. It is work for someone who reads water and mud.",
+            work:  { text: "Researchers will set reed shoots in rows along the northern shore: the replanting this Workstation is here for. Nothing out of the ordinary is planned.",
                      useful: false, why: "The Reedbed's description already told you this work, and Soren's role already fits it; nothing here changes a placement." },
             learn: { text: "The shoots that die first sit in the shallowest mud, where the water drains fastest after rain. Measuring that is one person's job with a water gauge, not a planting team's.",
                      useful: true, why: "Told you the Reedbed's job today is one person's with a water gauge, so Soren alone covers it and nobody else needs to join him there; nothing on screen said that." }
