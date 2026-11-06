@@ -138,6 +138,15 @@
     try { window.parent.postMessage(message, location.origin); } catch (e) { /* nothing to do */ }
   }
 
+  /* Full Mock Test, fix round 1 (D37): in the Mock Test the shell owns full
+     screen. The header button asks the shell, and the shell says whether its
+     page is in full screen (this frame's own document.fullscreenElement stays
+     empty when the parent page is the full-screen one). */
+  var shellFullscreen = false;
+  function isFullscreen() {
+    return SHELL ? shellFullscreen : !!(typeof document !== "undefined" && document.fullscreenElement);
+  }
+
   /* The clock reading when each site starts ("Begin") and when its Step 4 is
      submitted, in shell mode only. The clock is paused between the two. */
   var phaseMarks = [];
@@ -420,7 +429,7 @@
        The browser's own Escape key is handled too — see the
        fullscreenchange listener near the bottom of this file. It is not
        drawn at all where fullscreen is impossible. */
-    var isBig = !!(typeof document !== "undefined" && document.fullscreenElement);
+    var isBig = isFullscreen();   /* fix round 1 (D37): the shell's state in the Mock Test */
     var fullscreenButton = fullscreenAvailable()
       ? '<button class="btn-fullscreen" data-action="fullscreen" title="' +
         (isBig ? "Exit full screen" : "Full screen") + '">' +
@@ -1695,6 +1704,10 @@
          button is not drawn at all — see fullscreenAvailable() and README
          §8 (D46). */
       case "fullscreen": {
+        /* Full Mock Test, fix round 1 (D37): the shell puts its whole page in
+           full screen (the click counts for the parent page too), so this
+           frame is never the full-screen element. */
+        if (SHELL) { postToShell({ type: "mock-fullscreen", game: CONFIG.mockGameId }); return; }
         if (document.fullscreenElement) {
           if (document.exitFullscreen) document.exitFullscreen().catch(function () { });
         } else if (document.documentElement.requestFullscreen) {
@@ -1949,6 +1962,10 @@
       state.ui.openSites[String(sites()[0].id)] = true;
       state.phase = "results";
       render();
+    }
+    if (data.type === "mock-fullscreen-state" && !!data.on !== shellFullscreen) {   /* fix round 1 (D37) */
+      shellFullscreen = !!data.on;          /* redraw only on a change: the button's icon follows */
+      if (state) render();
     }
   });
 
