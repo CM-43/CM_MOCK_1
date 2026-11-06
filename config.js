@@ -23,11 +23,11 @@
 var CONFIG = {
 
   /* The username candidates type. */
-  username: "CaseMentorMock1",
+  username: "CaseMentor7137",
 
   /* The password, scrambled (a SHA-256 "hash"). Currently the placeholder
      change-me-before-launch. */
-  passcodeHash: "22d1c9017df0929ef31cfd943bbc97d2adeff40c010e19d89f1a006943f2132c",
+  passcodeHash: "6b236fab899e72e13e3cd384792743339974da4f6f144904b1352556e81ab5ce",
 
   /* The Mock Test page itself may be opened directly (it has the login).
      The three games inside it refuse to run unless they are inside this
